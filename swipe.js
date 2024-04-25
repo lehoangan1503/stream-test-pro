@@ -43,7 +43,7 @@ function handleTouchMove(evt) {
       // swipe right
       video.currentTime += 1;
     }
-  } else {
+  } else if (Math.abs(xDiff) < Math.abs(yDiff) && (typeOfSwipe == "vertical" || typeOfSwipe == null)) {
     i <= 9 ? (tendArray[i] = "vertical") : "";
     if (yDiff > 0) {
       // swipe up
@@ -81,7 +81,6 @@ function handleTouchMove(evt) {
   yDown = evt.touches[0].clientY;
 }
 function determinesDirection() {
-  console.log(tendArray);
   let counts = {};
 
   tendArray.forEach((value) => {
