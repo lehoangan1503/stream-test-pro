@@ -33,6 +33,7 @@ function handleTouchMove(evt) {
     typeOfSwipe = determinesDirection();
   }
 
+  // Left and Right swipe
   if (Math.abs(xDiff) > Math.abs(yDiff) && (typeOfSwipe == "horizontal" || typeOfSwipe == null)) {
     /*most significant*/
     i <= 9 ? (tendArray[i] = "horizontal") : "";
@@ -43,7 +44,13 @@ function handleTouchMove(evt) {
       // swipe right
       video.currentTime += 1;
     }
-  } else if (Math.abs(xDiff) < Math.abs(yDiff) && (typeOfSwipe == "vertical" || typeOfSwipe == null)) {
+  }
+  // Up and Down swipe (Volume)
+  else if (
+    Math.abs(xDiff) < Math.abs(yDiff) &&
+    (typeOfSwipe == "vertical" || typeOfSwipe == null) &&
+    isFullScreenMode
+  ) {
     i <= 9 ? (tendArray[i] = "vertical") : "";
     if (yDiff > 0) {
       // swipe up
@@ -82,7 +89,7 @@ function handleTouchMove(evt) {
 }
 function determinesDirection() {
   let counts = {};
-
+  if (tendArray[0] == null) return;
   tendArray.forEach((value) => {
     counts[value] = (counts[value] || 0) + 1;
   });

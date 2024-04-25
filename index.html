@@ -123,6 +123,7 @@
       <script>
         var timeoutOpacity = null;
         var timeoutHide = null;
+        var isFullScreenMode = false;
         document.addEventListener("DOMContentLoaded", () => {
           const overlay = document.getElementById("overlay-volume");
           const volControl = document.getElementById("vol-control");
@@ -142,9 +143,11 @@
             if (!document.fullscreenElement) {
               fullscreenApi.call(container);
               fullScreenBtn.style.opacity = 1;
+              isFullScreenMode = true;
             } else {
               document.exitFullscreen();
               fullScreenBtn.style.opacity = 0;
+              isFullScreenMode = false;
             }
           };
           container.addEventListener("touchstart", function () {
